@@ -1,0 +1,1 @@
+print 'Jenkins is cool!'
