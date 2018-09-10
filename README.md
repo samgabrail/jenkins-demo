@@ -72,4 +72,27 @@ set -x
 docker push ${DTR_URL}/jenkins/jenkins-demo:${GITID}
 ```
 
+## Jenkins shell script to deploy the service
+```
+# find the short git SHA (if set)
+if [ -n "${DEPLOY_GIT_SHA}" ]
+then
+  DEPLOY_GIT_SHA=$(echo ${DEPLOY_GIT_SHA} | cut -c1-7)
+else
+  echo "supply a git commit id"
+  exit 1
+fi
+
+# set environment variables to be able to talk to the swarm manager
+export DOCKER_TLS_VERIFY=1 COMPOSE_TLS_VERSION=TLSv1_2 DTR_URL=dtr1.demo.samgabrail.com DOCKER_CERT_PATH=/var/lib/jenkins/ucp-bundle KUBECONFIG=/var/lib/jenkins/ucp-bundle/kube.yml DOCKER_HOST=tcp://172.31.3.199:12376
+#export DOCKER_TLS_VERIFY=1 DOCKER_CERT_PATH=/etc/docker SWARM_MASTER_IP=172.31.3.199 DOCKER_HOST=tcp://${SWARM_MASTER_IP}:2376
+
+# deploy the container
+#docker run -d --name jenkinsCoolDemo-${DEPLOY_GIT_SHA} ${DTR_URL}/jenkins/jenkins-demo:${DEPLOY_GIT_SHA}
+docker service create -d --name jenkinsCoolDemo-${DEPLOY_GIT_SHA} ${DTR_URL}/jenkins/jenkins-demo:${DEPLOY_GIT_SHA}
+
+# notify user of app being available
+echo "Application successfully deployed"
+```
+
 
