@@ -1,1 +1,2 @@
-print 'Jenkins is cool!, eh?! Yeah I think so once again'
+while True:
+	print 'Jenkins is cool!, eh?! Yeah I think so once again'
