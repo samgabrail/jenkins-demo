@@ -1,7 +1,7 @@
 # Jenkins CI/CD and Docker EE for DevOps Demo
 This is to show a demo of how you can integrate Jenkins CI/CD workflow with Docker Enterprise Edition (EE).
 
-I built a simple python app and use github for version control. When I commit and push to the github rep, Jenkins automatically builds the image and pushes to the Docker Trusted Registry (DTR) in Docker EE.
+I built a simple python app and use github for version control. When I commit and push to the github repo, Jenkins automatically builds the image and pushes to the Docker Trusted Registry (DTR) in Docker EE.
 
 For all this to work, you need to generate a client bundle for the jenkins user that will access the Universal Control Plane (UCP) 
 
