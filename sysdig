@@ -858,8 +858,8 @@ function sysdigcloud_setup()
     wait_for_cmd cmd_mysql_pod_running
     update_global_vars 
 
-    public_ip=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
-
+    #public_ip=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+    public_ip=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
     install_agent
 
     printf "\n\n\n\n
